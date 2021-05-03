@@ -1,4 +1,6 @@
 package com.sula.ranjith_learners.model;
 
-public interface SuperEntity {
+import java.io.Serializable;
+
+public interface SuperEntity extends Serializable {
 }

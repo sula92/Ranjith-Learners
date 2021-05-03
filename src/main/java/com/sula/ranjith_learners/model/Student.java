@@ -6,6 +6,7 @@ import com.sula.ranjith_learners.model.enums.LicenceType;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "students")
@@ -29,12 +30,26 @@ public class Student implements SuperEntity {
     private String emergencyContactPerson;
     private String emergencyContactNumber;
     @Enumerated(EnumType.STRING)
-    LicenceType licenceType;
+    private LicenceType licenceType;
+    @ManyToMany
+    @JoinTable(
+            name = "student_exam",
+            joinColumns = {@JoinColumn(name = "student_id")},
+            inverseJoinColumns = {@JoinColumn(name = "exam_id")}
+            )
+    private List<Exam> exams;
+    @ManyToMany
+    @JoinTable(
+            name = "student_trial",
+            joinColumns = {@JoinColumn(name = "student_id")},
+            inverseJoinColumns = {@JoinColumn(name = "trial_id")}
+    )
+    private List<Trial> trials;
 
     public Student() {
     }
 
-    public Student(long id, String name, String address, int age, Gender gender, String contact, Branch branch, Date dateOfJoined, CivilStatus civilStatus, String emergencyContactPerson, String emergencyContactNumber, LicenceType licenceType) {
+    public Student(long id, String name, String address, int age, Gender gender, String contact, Branch branch, Date dateOfJoined, CivilStatus civilStatus, String emergencyContactPerson, String emergencyContactNumber, LicenceType licenceType, List<Exam> exams, List<Trial> trials) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -47,6 +62,8 @@ public class Student implements SuperEntity {
         this.emergencyContactPerson = emergencyContactPerson;
         this.emergencyContactNumber = emergencyContactNumber;
         this.licenceType = licenceType;
+        this.exams = exams;
+        this.trials = trials;
     }
 
     public long getId() {
@@ -145,6 +162,22 @@ public class Student implements SuperEntity {
         this.licenceType = licenceType;
     }
 
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
+    }
+
+    public List<Trial> getTrials() {
+        return trials;
+    }
+
+    public void setTrials(List<Trial> trials) {
+        this.trials = trials;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -160,6 +193,8 @@ public class Student implements SuperEntity {
                 ", emergencyContactPerson='" + emergencyContactPerson + '\'' +
                 ", emergencyContactNumber='" + emergencyContactNumber + '\'' +
                 ", licenceType=" + licenceType +
+                ", exams=" + exams +
+                ", trials=" + trials +
                 '}';
     }
 }

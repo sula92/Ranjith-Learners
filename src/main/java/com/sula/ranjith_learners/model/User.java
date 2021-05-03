@@ -1,6 +1,7 @@
 package com.sula.ranjith_learners.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
@@ -9,8 +10,11 @@ public class User implements SuperEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotNull
     private String name;
+    @NotNull
     private String userName;
+    @NotNull
     private String password;
 
     public User() {
