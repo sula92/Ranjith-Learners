@@ -11,7 +11,7 @@ public class Branch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private long id;
     private String name;
     private String address;
     private Date dateOfEstablished;
@@ -20,7 +20,7 @@ public class Branch {
     public Branch() {
     }
 
-    public Branch(String id, String name, String address, Date dateOfEstablished, String contact) {
+    public Branch(long id, String name, String address, Date dateOfEstablished, String contact) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -28,11 +28,11 @@ public class Branch {
         this.contact = contact;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -71,7 +71,7 @@ public class Branch {
     @Override
     public String toString() {
         return "Branch{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", dateOfEstablished=" + dateOfEstablished +
