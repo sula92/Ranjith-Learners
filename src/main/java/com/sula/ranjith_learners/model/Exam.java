@@ -2,9 +2,11 @@ package com.sula.ranjith_learners.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 @Entity
 @Table(name = "exams")
@@ -15,6 +17,8 @@ public class Exam implements SuperEntity {
     private Date date;
     private Time time;
     private String venue;
+    @ManyToMany(mappedBy = "exams")
+    private List<Student> students;
 
     public Exam() {
     }
@@ -24,6 +28,14 @@ public class Exam implements SuperEntity {
         this.date = date;
         this.time = time;
         this.venue = venue;
+    }
+
+    public Exam(String id, Date date, Time time, String venue, List<Student> students) {
+        this.id = id;
+        this.date = date;
+        this.time = time;
+        this.venue = venue;
+        this.students = students;
     }
 
     public String getId() {
@@ -58,6 +70,14 @@ public class Exam implements SuperEntity {
         this.venue = venue;
     }
 
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
     @Override
     public String toString() {
         return "Exam{" +
@@ -65,6 +85,7 @@ public class Exam implements SuperEntity {
                 ", date=" + date +
                 ", time=" + time +
                 ", venue='" + venue + '\'' +
+                ", students=" + students +
                 '}';
     }
 }

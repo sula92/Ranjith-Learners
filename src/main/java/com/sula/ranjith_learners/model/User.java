@@ -1,6 +1,9 @@
 package com.sula.ranjith_learners.model;
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -17,14 +20,19 @@ public class User implements SuperEntity {
     @NotNull
     private String password;
 
+    @NonNull
+    @Email(regexp = ".+@.+\\..+")
+    private String email;
+
     public User() {
     }
 
-    public User(long id, String name, String userName, String password) {
+    public User(long id, @NotNull String name, @NotNull String userName, @NotNull String password, @NonNull @Email String email) {
         this.id = id;
         this.name = name;
         this.userName = userName;
         this.password = password;
+        this.email = email;
     }
 
     public long getId() {
@@ -59,6 +67,15 @@ public class User implements SuperEntity {
         this.password = password;
     }
 
+    @NonNull
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@NonNull String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -66,6 +83,7 @@ public class User implements SuperEntity {
                 ", name='" + name + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

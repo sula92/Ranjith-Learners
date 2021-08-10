@@ -3,7 +3,8 @@ package com.sula.ranjith_learners.model;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "branches")
@@ -14,6 +15,8 @@ public class Branch {
     private long id;
     private String name;
     private String address;
+    @Basic
+    @Temporal(TemporalType.DATE)
     private Date dateOfEstablished;
     private String contact;
 
