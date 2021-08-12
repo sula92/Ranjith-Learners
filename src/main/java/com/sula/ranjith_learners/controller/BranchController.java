@@ -23,7 +23,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController//(@controller+@ResponseBody)
-@RequestMapping("/api/v1/")
+@RequestMapping("/api")
 public class BranchController {
 
     @Autowired
@@ -60,7 +60,7 @@ public class BranchController {
     public Branch getBranch(@PathVariable long id) throws Exception {
 
 
-        Branch branch= branchRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No Such Employee"));
+        Branch branch= branchRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No Such Branch"));
         //Branch branch= employeeRepository.findById(id).get();
         //Branch branch= employeeRepository.getOne(id);
         return ResponseEntity.ok(branch).getBody();

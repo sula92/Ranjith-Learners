@@ -14,7 +14,7 @@ import javax.xml.ws.Action;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api")
 @Transactional
 public class ExamController {
 
