@@ -17,8 +17,8 @@ public class Exam implements SuperEntity {
     private Date date;
     private Time time;
     private String venue;
-    @ManyToMany(mappedBy = "exams")
-    private List<Student> students;
+    /*@ManyToMany(mappedBy = "exams")
+    private List<Student> students;*/
 
     public Exam() {
     }
@@ -30,13 +30,7 @@ public class Exam implements SuperEntity {
         this.venue = venue;
     }
 
-    public Exam(String id, Date date, Time time, String venue, List<Student> students) {
-        this.id = id;
-        this.date = date;
-        this.time = time;
-        this.venue = venue;
-        this.students = students;
-    }
+
 
     public String getId() {
         return id;
@@ -70,13 +64,24 @@ public class Exam implements SuperEntity {
         this.venue = venue;
     }
 
-    public List<Student> getStudents() {
+   /* public List<Student> getStudents() {
         return students;
-    }
+    }*/
 
-    public void setStudents(List<Student> students) {
+   /* public void setStudents(List<Student> students) {
         this.students = students;
-    }
+    }*/
+
+    /*@Override
+    public String toString() {
+        return "Exam{" +
+                "id='" + id + '\'' +
+                ", date=" + date +
+                ", time=" + time +
+                ", venue='" + venue + '\'' +
+                ", students=" + students +
+                '}';
+    }*/
 
     @Override
     public String toString() {
@@ -85,7 +90,6 @@ public class Exam implements SuperEntity {
                 ", date=" + date +
                 ", time=" + time +
                 ", venue='" + venue + '\'' +
-                ", students=" + students +
                 '}';
     }
 }
