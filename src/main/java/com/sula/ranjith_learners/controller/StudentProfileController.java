@@ -1,14 +1,14 @@
 package com.sula.ranjith_learners.controller;
 
+import com.sula.ranjith_learners.model.Student;
 import com.sula.ranjith_learners.model.StudentProfile;
 import com.sula.ranjith_learners.repository.StudentProfileRepository;
+import com.sula.ranjith_learners.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -18,10 +18,29 @@ public class StudentProfileController {
     @Autowired
     StudentProfileRepository studentProfileRepository;
 
-    @GetMapping("/studentprofile/{stdId}")
-    private StudentProfile getProfileByStudentId(@PathVariable long id){
-        return studentProfileRepository.getStudentProfileByStudentEqualsAndProfileIdIsNotNull(id);
+    @Autowired
+    StudentRepository studentRepository;
+
+    @GetMapping("/studentprofiles")
+    private List<StudentProfile> getProfileByStudentId(){
+        return studentProfileRepository.findAll();
 
 
     }
+
+    @GetMapping("/studentprofiles/{id}")
+    private StudentProfile getProfileByStudentId(@PathVariable long id){
+        return studentProfileRepository.getStudentProfileByStudentId(id);
+
+
+    }
+
+    @DeleteMapping("/studentprofiles/{id}")
+    private void DeleteProfileByStudentId(@PathVariable long id){
+        StudentProfile studentProfile= studentProfileRepository.getStudentProfileByStudentId(id);
+        int pid=studentProfile.getProfileId();
+        studentProfileRepository.deleteById(pid);
+
+    }
 }
+
