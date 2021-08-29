@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StudentProfileRepository extends JpaRepository<StudentProfile, Integer> {
 
-    @Query("select sp from StudentProfile sp left join fetch sp.student where sp.student.id=:id")
+    /*@Query("select sp from StudentProfile sp left join fetch sp.student where sp.student.id=:id")
+    StudentProfile getStudentProfileByStudentId(@Param("id") Long id);*/
+
+    @Query("select sp from StudentProfile sp where sp.studentPayment.student.id=:id")
     StudentProfile getStudentProfileByStudentId(@Param("id") Long id);
 }

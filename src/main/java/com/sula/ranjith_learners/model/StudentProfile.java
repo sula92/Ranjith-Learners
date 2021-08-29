@@ -9,7 +9,8 @@ public class StudentProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int profileId;
-    @OneToOne
+
+    /*@OneToOne
     @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
     @OneToOne
@@ -17,7 +18,8 @@ public class StudentProfile {
     private Exam exam;
     @OneToOne
     @JoinColumn(name = "trial_id", referencedColumnName = "id")
-    private Trial trial;
+    private Trial trial;*/
+
     @OneToOne
     @JoinColumn(name = "resultSheetNo", referencedColumnName = "resultSheetNo")
     private StudentResult studentResult;
@@ -28,11 +30,8 @@ public class StudentProfile {
     public StudentProfile() {
     }
 
-    public StudentProfile(int profileId, Student student, Exam exam, Trial trial, StudentResult studentResult, StudentPayment studentPayment) {
+    public StudentProfile(int profileId, StudentResult studentResult, StudentPayment studentPayment) {
         this.profileId = profileId;
-        this.student = student;
-        this.exam = exam;
-        this.trial = trial;
         this.studentResult = studentResult;
         this.studentPayment = studentPayment;
     }
@@ -43,30 +42,6 @@ public class StudentProfile {
 
     public void setProfileId(int profileId) {
         this.profileId = profileId;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public Exam getExam() {
-        return exam;
-    }
-
-    public void setExam(Exam exam) {
-        this.exam = exam;
-    }
-
-    public Trial getTrial() {
-        return trial;
-    }
-
-    public void setTrial(Trial trial) {
-        this.trial = trial;
     }
 
     public StudentResult getStudentResult() {
@@ -89,9 +64,6 @@ public class StudentProfile {
     public String toString() {
         return "StudentProfile{" +
                 "profileId=" + profileId +
-                ", student=" + student +
-                ", exam=" + exam +
-                ", trial=" + trial +
                 ", studentResult=" + studentResult +
                 ", studentPayment=" + studentPayment +
                 '}';
