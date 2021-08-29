@@ -46,6 +46,7 @@ public class Student implements SuperEntity {
     )
     private List<Trial> trials;
 
+
     public Student() {
     }
 

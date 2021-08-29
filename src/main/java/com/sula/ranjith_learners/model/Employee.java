@@ -7,6 +7,7 @@ import com.sula.ranjith_learners.model.enums.CivilStatus;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Arrays;
 
 @Entity
 @Table(name = "employees")
@@ -32,10 +33,14 @@ public class Employee implements SuperEntity {
     private String emergencyContactPerson;
     private String emergencyContactNumber;
 
+    @Lob
+    @Column(name="picture")
+    private byte[] pic;
+
     public Employee() {
     }
 
-    public Employee(long id, String name, String address, int age, Gender gender, String position, String contact, Branch branch, double sallary, Date dateOfRecruited, CivilStatus civilStatus, String emergencyContactPerson, String emergencyContactNumber) {
+    public Employee(long id, String name, String address, int age, Gender gender, String position, String contact, Branch branch, double sallary, Date dateOfRecruited, CivilStatus civilStatus, String emergencyContactPerson, String emergencyContactNumber, byte[] pic) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -49,6 +54,7 @@ public class Employee implements SuperEntity {
         this.civilStatus = civilStatus;
         this.emergencyContactPerson = emergencyContactPerson;
         this.emergencyContactNumber = emergencyContactNumber;
+        this.pic = pic;
     }
 
     public long getId() {
@@ -155,6 +161,14 @@ public class Employee implements SuperEntity {
         this.emergencyContactNumber = emergencyContactNumber;
     }
 
+    public byte[] getPic() {
+        return pic;
+    }
+
+    public void setPic(byte[] pic) {
+        this.pic = pic;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -171,6 +185,7 @@ public class Employee implements SuperEntity {
                 ", civilStatus=" + civilStatus +
                 ", emergencyContactPerson='" + emergencyContactPerson + '\'' +
                 ", emergencyContactNumber='" + emergencyContactNumber + '\'' +
+                ", pic=" + Arrays.toString(pic) +
                 '}';
     }
 }
