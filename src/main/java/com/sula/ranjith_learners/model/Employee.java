@@ -1,9 +1,8 @@
 package com.sula.ranjith_learners.model;
 
 
-import com.sula.ranjith_learners.model.enums.Gender;
 import com.sula.ranjith_learners.model.enums.CivilStatus;
-
+import com.sula.ranjith_learners.model.enums.Gender;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -55,6 +54,22 @@ public class Employee implements SuperEntity {
         this.emergencyContactPerson = emergencyContactPerson;
         this.emergencyContactNumber = emergencyContactNumber;
         this.pic = pic;
+    }
+
+    public Employee(long id, String name, String address, int age, Gender gender, String position, String contact, Branch branch, double sallary, Date dateOfRecruited, CivilStatus civilStatus, String emergencyContactPerson, String emergencyContactNumber) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.age = age;
+        this.gender = gender;
+        this.position = position;
+        this.contact = contact;
+        this.branch = branch;
+        this.sallary = sallary;
+        this.dateOfRecruited = dateOfRecruited;
+        this.civilStatus = civilStatus;
+        this.emergencyContactPerson = emergencyContactPerson;
+        this.emergencyContactNumber = emergencyContactNumber;
     }
 
     public long getId() {

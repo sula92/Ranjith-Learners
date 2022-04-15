@@ -1,17 +1,16 @@
 package com.sula.ranjith_learners.controller;
 
 import com.sula.ranjith_learners.exceptions.ResourceNotFoundException;
-import com.sula.ranjith_learners.model.Exam;
 import com.sula.ranjith_learners.model.Trial;
 import com.sula.ranjith_learners.repository.TrialRepository;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import sun.misc.Resource;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
+
+//import sun.misc.Resource;
 
 @RestController
 @RequestMapping("/api")
