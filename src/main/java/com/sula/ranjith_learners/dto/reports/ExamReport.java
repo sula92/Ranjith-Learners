@@ -12,9 +12,9 @@ public interface ExamReport {
 
     String getVenue();
 
-    long getTotalParticipants();
+    int getTotalParticipants();
 
-    long getTotalPass();
+    int getTotalPass();
 
-    long getTotalFail();
+    int getTotalFail();
 }

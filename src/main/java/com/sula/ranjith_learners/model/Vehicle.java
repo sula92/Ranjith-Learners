@@ -1,5 +1,6 @@
 package com.sula.ranjith_learners.model;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -11,7 +12,8 @@ public class Vehicle implements SuperEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String number;
-    private String brancdAndModel;
+    @Column(name = "type_and_model")
+    private String typeAndModel;
     @OneToOne
     @JoinColumn(name = "branch_id", referencedColumnName = "id")
     @NotNull

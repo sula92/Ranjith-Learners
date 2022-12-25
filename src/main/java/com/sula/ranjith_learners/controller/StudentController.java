@@ -11,7 +11,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping(value = "/api",
+        produces = "application/json")
 @Transactional
 public class StudentController {
 
@@ -43,7 +44,8 @@ public class StudentController {
         }
     }
 
-    @PostMapping("/students")
+    @PostMapping(value = "/students",
+            produces = "application/json")
     public Student saveStudent(@RequestBody @Valid Student student){
         return studentRepository.save(student);
     }

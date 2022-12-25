@@ -1,10 +1,9 @@
 package com.sula.ranjith_learners.model;
 
 import com.sula.ranjith_learners.model.enums.Result;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Table(name = "results")
 @Entity

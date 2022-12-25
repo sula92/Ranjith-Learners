@@ -5,23 +5,17 @@ import com.sula.ranjith_learners.exceptions.ResourceNotFoundException;
 import com.sula.ranjith_learners.model.Branch;
 import com.sula.ranjith_learners.repository.BranchRepository;
 import com.sula.ranjith_learners.service.BranchService;
-import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
 import javax.validation.Valid;
-import java.util.Date;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController//(@controller+@ResponseBody)
 @RequestMapping("/api")
 public class BranchController {

@@ -20,6 +20,9 @@ public class User implements SuperEntity {
     @NotNull
     private String password;
 
+    @NotNull
+    private String privilege;
+
     @NonNull
     @Email(regexp = ".+@.+\\..+")
     private String email;
@@ -27,11 +30,12 @@ public class User implements SuperEntity {
     public User() {
     }
 
-    public User(long id, @NotNull String name, @NotNull String userName, @NotNull String password, @NonNull @Email String email) {
+    public User(long id, @NotNull String name, @NotNull String userName, @NotNull String password, @NotNull String privilege, @NonNull @Email(regexp = ".+@.+\\..+") String email) {
         this.id = id;
         this.name = name;
         this.userName = userName;
         this.password = password;
+        this.privilege = privilege;
         this.email = email;
     }
 
@@ -67,6 +71,14 @@ public class User implements SuperEntity {
         this.password = password;
     }
 
+    public String getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(String privilege) {
+        this.privilege = privilege;
+    }
+
     @NonNull
     public String getEmail() {
         return email;
@@ -83,6 +95,7 @@ public class User implements SuperEntity {
                 ", name='" + name + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
+                ", privilege='" + privilege + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }

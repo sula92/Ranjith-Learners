@@ -12,12 +12,12 @@ public class ExamService {
     ExamRepository examRepository;
 
     public Exam saveExam(Exam exam){
-        Exam lastExam=examRepository.findTopByOrderByIdDesc().get();
-        String lastId=lastExam.getId();
-        String newId;
-        int lId= Integer.parseInt(lastId.replace("E",""));
-        newId="E"+(lId+1);
-        exam.setId(newId);
+//        Exam lastExam=examRepository.findTopByOrderByIdDesc().get();
+//        String lastId=lastExam.getId();
+//        String newId;
+//        int lId= Integer.parseInt(lastId.replace("E",""));
+//        newId="E"+(lId+1);
+//        exam.setId(newId);
         return examRepository.save(exam);
     }
 }

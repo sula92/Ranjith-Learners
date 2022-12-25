@@ -1,9 +1,13 @@
 package com.sula.ranjith_learners.controller;
 
+import com.sula.ranjith_learners.dto.UserInfoDTO;
+import com.sula.ranjith_learners.dto.UserLoginDTO;
 import com.sula.ranjith_learners.exceptions.ResourceNotFoundException;
 import com.sula.ranjith_learners.model.User;
 import com.sula.ranjith_learners.repository.UserRepository;
+import com.sula.ranjith_learners.utility.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -11,15 +15,75 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping(
+        value = "/api",
+        produces = "application/json")
+
+@CrossOrigin(origins = {
+        "*"
+
+},
+        allowedHeaders = "*",
+
+        maxAge = 15 * 60,
+        methods = {
+                RequestMethod.GET,
+                RequestMethod.POST,
+                RequestMethod.DELETE,
+                RequestMethod.PUT
+        })
 @Transactional
 public class UserController {
 
     @Autowired
     UserRepository userRepository;
 
+    private final String adminPage="admin.html";
+    private final String userPage="user.html";
+    private final String errorPage="error.html";
+
+    @PostMapping("/users/login")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public UserInfoDTO login(@RequestBody UserLoginDTO userLoginDTO){
+
+        System.out.println("hhhhhhhhhhhhhhh");
+        System.out.println(userLoginDTO.getUserName());
+        System.out.println(userLoginDTO.getPassword());
+
+        List<User> users= userRepository.findAll();
+        for (User user:users) {
+            if(user.getUserName().equalsIgnoreCase(userLoginDTO.getUserName()) &
+                    user.getPassword().equalsIgnoreCase(userLoginDTO.getPassword()) &
+                    user.getPrivilege().equalsIgnoreCase("admin")){
+
+                Session.userId= String.valueOf(user.getId());
+                Session.userName=user.getUserName();
+                Session.privilege=user.getPrivilege();
+
+                System.out.println(user.getPrivilege());
+
+                return new UserInfoDTO(String.valueOf(user.getId()), adminPage, user.getPrivilege());
+            }
+            else if (user.getUserName().equalsIgnoreCase(userLoginDTO.getUserName()) &
+                    user.getPassword().equalsIgnoreCase(userLoginDTO.getPassword()) &
+                    user.getPrivilege().equalsIgnoreCase("user")){
+
+                Session.userId= String.valueOf(user.getId());
+                Session.userName=user.getUserName();
+                Session.privilege=user.getPrivilege();
+
+                UserInfoDTO userInfoDTO= new UserInfoDTO(String.valueOf(user.getId()), userPage, user.getPrivilege());
+                System.out.println("FFFFFFFFFFFFFFFFFFF"+userInfoDTO.getId());
+                return userInfoDTO;
+            }
+        }
+        return new UserInfoDTO("error", errorPage, "error");
+    }
+
     @GetMapping("/users")
     public List<User> getAllUsers(){
+        System.out.println("yyyyyyyyyyyyyyyyyyyyy");
         return userRepository.findAll();
     }
 
