@@ -50,5 +50,6 @@ public class Student implements SuperEntity {
             inverseJoinColumns = {@JoinColumn(name = "trial_id")}
     )
     private List<Trial> trials;
+    private String isLicenseIssued;
 
 }

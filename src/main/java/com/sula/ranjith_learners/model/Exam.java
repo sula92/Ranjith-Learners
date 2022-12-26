@@ -1,18 +1,15 @@
 package com.sula.ranjith_learners.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.List;
 
 @Entity
 @Table(name = "exams")
 public class Exam implements SuperEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private Date date;
     private Time time;

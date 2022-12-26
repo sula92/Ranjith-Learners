@@ -3,11 +3,16 @@ package com.sula.ranjith_learners.model;
 
 import com.sula.ranjith_learners.model.enums.CivilStatus;
 import com.sula.ranjith_learners.model.enums.Gender;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Arrays;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "employees")
 public class Employee implements SuperEntity {
@@ -17,7 +22,6 @@ public class Employee implements SuperEntity {
     private long id;
     private String name;
     private String address;
-    private int age;
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private String position;
@@ -25,14 +29,14 @@ public class Employee implements SuperEntity {
     @ManyToOne
     @JoinColumn(name = "branch_id", referencedColumnName = "id")
     private Branch branch;
-    private double sallary;
+    private double salary;
     private Date dateOfRecruited;
     @Enumerated(EnumType.STRING)
     private CivilStatus civilStatus;
     private String emergencyContactPerson;
     private String emergencyContactNumber;
 
-    @Lob
+    /*@Lob
     @Column(name="picture")
     private byte[] pic;
 
@@ -202,5 +206,5 @@ public class Employee implements SuperEntity {
                 ", emergencyContactNumber='" + emergencyContactNumber + '\'' +
                 ", pic=" + Arrays.toString(pic) +
                 '}';
-    }
+    }*/
 }

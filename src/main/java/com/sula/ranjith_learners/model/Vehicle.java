@@ -1,9 +1,16 @@
 package com.sula.ranjith_learners.model;
 
 
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "vehicles")
 public class Vehicle implements SuperEntity {
@@ -21,10 +28,6 @@ public class Vehicle implements SuperEntity {
     @ManyToOne
     @JoinColumn(name = "supplier_id", referencedColumnName = "id")
     private Supplier supplier;
-
-
-    public Vehicle() {
-    }
 
 
 }
