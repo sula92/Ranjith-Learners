@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BranchRepository extends JpaRepository<Branch,Long> {
+public interface BranchRepository extends JpaRepository<Branch,Integer> {
 
     public Branch findAllByIdIsNotNullAndNameEquals(@Param("name") String name);
 
