@@ -13,15 +13,16 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Entity
 @Table(name = "vehicles")
+@Builder
 public class Vehicle implements SuperEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
     private String number;
     @Column(name = "type_and_model")
     private String typeAndModel;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "branch_id", referencedColumnName = "id")
     @NotNull
     private Branch branch;
