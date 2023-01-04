@@ -55,7 +55,7 @@ public class ExamController {
     }
 
     @GetMapping("/exams/{id}")
-    public Exam getExamById(@PathVariable String id) throws ResourceNotFoundException {
+    public Exam getExamById(@PathVariable int id) throws ResourceNotFoundException {
         try {
             return examRepository.findById(id).get();
         }
@@ -101,7 +101,7 @@ public class ExamController {
     public Exam test(@RequestBody ExamDTO examDTO){
 
         Exam exam= new Exam();
-        exam.setId("123");
+        exam.setId(1);
         exam.setDate(Date.valueOf(LocalDate.now()));
         exam.setVenue("sss");
         return exam;
@@ -109,11 +109,14 @@ public class ExamController {
 
     @PutMapping("/exams")
     public Exam editExam(@RequestBody @Valid Exam exam){
+
+       Exam exam1=examRepository.findById(exam.getId()).get();
+              // exam1.builder().date(exam.getDate()).venue(exam.getVenue()).time(exam.getTime()).build();
         return examRepository.save(exam);
     }
 
     @DeleteMapping("/exams")
-    public void deleteExam(@RequestParam String id){
+    public void deleteExam(@RequestParam int id){
         examRepository.deleteById(id);
     }
 

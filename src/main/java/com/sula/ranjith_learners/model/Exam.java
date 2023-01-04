@@ -1,92 +1,29 @@
 package com.sula.ranjith_learners.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "exams")
 public class Exam implements SuperEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
     private Date date;
     private Time time;
     private String venue;
     /*@ManyToMany(mappedBy = "exams")
     private List<Student> students;*/
 
-    public Exam() {
-    }
 
-    public Exam(String id, Date date, Time time, String venue) {
-        this.id = id;
-        this.date = date;
-        this.time = time;
-        this.venue = venue;
-    }
-
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
-    }
-
-    public String getVenue() {
-        return venue;
-    }
-
-    public void setVenue(String venue) {
-        this.venue = venue;
-    }
-
-   /* public List<Student> getStudents() {
-        return students;
-    }*/
-
-   /* public void setStudents(List<Student> students) {
-        this.students = students;
-    }*/
-
-    /*@Override
-    public String toString() {
-        return "Exam{" +
-                "id='" + id + '\'' +
-                ", date=" + date +
-                ", time=" + time +
-                ", venue='" + venue + '\'' +
-                ", students=" + students +
-                '}';
-    }*/
-
-    @Override
-    public String toString() {
-        return "Exam{" +
-                "id='" + id + '\'' +
-                ", date=" + date +
-                ", time=" + time +
-                ", venue='" + venue + '\'' +
-                '}';
-    }
 }

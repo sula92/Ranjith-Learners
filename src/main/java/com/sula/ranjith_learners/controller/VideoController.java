@@ -33,7 +33,7 @@ public class VideoController {
     }
 
     @GetMapping("/exams/{id}")
-    public Exam getExamById(@PathVariable String id) throws ResourceNotFoundException {
+    public Exam getExamById(@PathVariable int id) throws ResourceNotFoundException {
         try {
             return examRepository.findById(id).get();
         }
@@ -55,7 +55,7 @@ public class VideoController {
     }
 
     @DeleteMapping("/exams/{id}")
-    public void deleteExam(@PathVariable String id){
+    public void deleteExam(@PathVariable int id){
         examRepository.deleteById(id);
     }
 

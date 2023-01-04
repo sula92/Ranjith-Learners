@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 public class Vehicle implements SuperEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String number;
     @Column(name = "type_and_model")

@@ -10,7 +10,7 @@ import java.sql.Date;
 public class LearningMaterial {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String description;
     @Column(name = "learning_material_type")

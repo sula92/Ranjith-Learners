@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface TrialRepository extends JpaRepository<Trial,Long> {
+public interface TrialRepository extends JpaRepository<Trial,Integer> {
 
     Optional<Trial> findTopByOrderByIdDesc();
 }

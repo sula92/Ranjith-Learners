@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class StudentProfile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int profileId;
 
     /*@OneToOne

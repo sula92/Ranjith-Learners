@@ -15,7 +15,7 @@ import java.sql.Date;
 public class OtherExpense {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private Date date;
     private String description;

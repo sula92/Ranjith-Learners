@@ -13,8 +13,24 @@ import java.util.List;
 //import sun.misc.Resource;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping(
+        value = "/api",
+        produces = "application/json")
 @Transactional
+
+@CrossOrigin(origins = {
+        "*"
+
+},
+        allowedHeaders = "*",
+
+        maxAge = 15 * 60,
+        methods = {
+                RequestMethod.GET,
+                RequestMethod.POST,
+                RequestMethod.DELETE,
+                RequestMethod.PUT
+        })
 public class TrailController {
 
     @Autowired
@@ -26,7 +42,7 @@ public class TrailController {
     }
 
     @GetMapping("/trials/{id}")
-    public Trial getTrialById(@PathVariable long id) throws ResourceNotFoundException {
+    public Trial getTrialById(@PathVariable int id) throws ResourceNotFoundException {
 
         try {
             return trialRepository.findById(id).get();
@@ -57,7 +73,7 @@ public class TrailController {
     }
 
     @DeleteMapping("/trials/{id}")
-    public void deleteTrial(@PathVariable long id){
+    public void deleteTrial(@PathVariable int id){
         trialRepository.deleteById(id);
     }
 

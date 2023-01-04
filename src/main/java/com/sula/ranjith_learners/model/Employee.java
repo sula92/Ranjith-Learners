@@ -18,8 +18,8 @@ import java.sql.Date;
 public class Employee implements SuperEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
     private String name;
     private String address;
     @Enumerated(EnumType.STRING)

@@ -3,9 +3,7 @@ package com.sula.ranjith_learners.controller;
 import com.sula.ranjith_learners.exceptions.ResourceNotFoundException;
 import com.sula.ranjith_learners.model.Employee;
 import com.sula.ranjith_learners.repository.EmployeeRepository;
-import com.sula.ranjith_learners.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -28,7 +26,7 @@ public class EmployeeController {
 
 
     @GetMapping("/employees/{id}")
-    public Employee getEmployeeById(@PathVariable long id) throws ResourceNotFoundException {
+    public Employee getEmployeeById(@PathVariable int id) throws ResourceNotFoundException {
         try {
             return employeeRepository.findById(id).get();
         } catch (Exception e) {
@@ -58,7 +56,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/employees/{id}")
-    public void deleteEmployee(@PathVariable long id) throws ResourceNotFoundException {
+    public void deleteEmployee(@PathVariable int id) throws ResourceNotFoundException {
         try {
             employeeRepository.delete(employeeRepository.findById(id).get());
         } catch (Exception e) {

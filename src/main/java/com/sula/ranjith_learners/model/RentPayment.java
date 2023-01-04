@@ -8,7 +8,7 @@ import java.sql.Date;
 public class RentPayment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int paymentId;
     @ManyToOne
     @JoinColumn(name = "vehicle_id", referencedColumnName = "id")
