@@ -22,8 +22,8 @@ public class Exam implements SuperEntity {
     private Date date;
     private Time time;
     private String venue;
-    /*@ManyToMany(mappedBy = "exams")
-    private List<Student> students;*/
+
+
 
 
 }

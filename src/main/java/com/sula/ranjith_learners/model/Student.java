@@ -36,20 +36,15 @@ public class Student implements SuperEntity {
     private CivilStatus civilStatus;
     @Enumerated(EnumType.STRING)
     private LicenceType licenceType;
-    @ManyToMany
-    @JoinTable(
-            name = "student_exam",
-            joinColumns = {@JoinColumn(name = "student_id")},
-            inverseJoinColumns = {@JoinColumn(name = "exam_id")}
-            )
-    private List<Exam> exams;
-    @ManyToMany
-    @JoinTable(
-            name = "student_trial",
-            joinColumns = {@JoinColumn(name = "student_id")},
-            inverseJoinColumns = {@JoinColumn(name = "trial_id")}
-    )
-    private List<Trial> trials;
+    @ManyToOne
+    @JoinColumn(name = "exam_id", referencedColumnName = "id")
+    Exam exam;
+    @JoinColumn(name = "trial_id", referencedColumnName = "id")
+    @ManyToOne
+    Trial trial;
     private String isLicenseIssued;
+    @ManyToMany(mappedBy = "students")
+    private List<Lecture> lectures;
+
 
 }

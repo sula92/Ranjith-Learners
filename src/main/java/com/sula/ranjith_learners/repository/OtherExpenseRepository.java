@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface OtherExpenseRepository extends JpaRepository<OtherExpense, Integer> {
 
-    @Query(value = "SELECT SUM(amount) FROM other_expenses WHERE date LIKE '2022-12%'", nativeQuery = true)
+    @Query(value = "SELECT SUM(amount) FROM other_expenses WHERE date LIKE '2023-01%'", nativeQuery = true)
     Long getTotOtherExpenses();
 }
