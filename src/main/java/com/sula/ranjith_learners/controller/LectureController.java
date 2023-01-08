@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -43,18 +42,33 @@ public class LectureController {
        return lectureRepository.findAll();
     }
 
+    @GetMapping("/lectures/{id}")
+    Lecture addStd(@PathVariable int id){
+        return lectureRepository.findById(id).get();
+
+    }
+/*
+    @GetMapping("/lectures/addStd/{id}")
+    Lecture getLecturesById(@PathVariable int id){
+        return lectureRepository.findById(id).get();
+    }*/
+
     @PostMapping("/lectures")
     Lecture createLecture(@RequestBody Lecture lecture){
 
         return lectureRepository.save(lecture);
     }
 
-    @PostMapping("/lectures/{sid}/{lecid}")
-    Lecture addStudent(@PathVariable long sid, @PathVariable int lecid){
+    @GetMapping("/lectures/add/{sid}/{lecid}")
+    Student addStudent(@PathVariable int sid, @PathVariable int lecid){
+        List<Student> studentList=lectureRepository.findById(lecid).get().getStudents();
         Lecture lecture=lectureRepository.findById(lecid).get();
         Student student=studentRepository.findById(sid).get();
-        lecture.setStudents(Arrays.asList(student));
-        return lectureRepository.save(lecture);
+        studentList.add(student);
+        lecture.setStudents(studentList);
+        lectureRepository.save(lecture);
+        return student;
+        //lectureRepository.saveStudent(lecid,sid);
     }
 
     @PutMapping("/lectures/{id}")

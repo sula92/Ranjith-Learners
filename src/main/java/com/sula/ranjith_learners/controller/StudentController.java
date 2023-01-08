@@ -11,9 +11,24 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api",
+@RequestMapping(
+        value = "/api",
         produces = "application/json")
 @Transactional
+
+@CrossOrigin(origins = {
+        "*"
+
+},
+        allowedHeaders = "*",
+
+        maxAge = 15 * 60,
+        methods = {
+                RequestMethod.GET,
+                RequestMethod.POST,
+                RequestMethod.DELETE,
+                RequestMethod.PUT
+        })
 public class StudentController {
 
     @Autowired
@@ -25,7 +40,7 @@ public class StudentController {
     }
 
     @GetMapping("/students/{id}")
-    public Student getStudentById(@PathVariable long id) throws ResourceNotFoundException {
+    public Student getStudentById(@PathVariable int id) throws ResourceNotFoundException {
         try {
             return studentRepository.findById(id).get();
         } catch (Exception e) {
@@ -56,7 +71,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/students/{id}")
-    public void deleteStudent(@PathVariable long id) throws ResourceNotFoundException {
+    public void deleteStudent(@PathVariable int id) throws ResourceNotFoundException {
         try {
             studentRepository.delete(studentRepository.findById(id).get());
         } catch (Exception e) {

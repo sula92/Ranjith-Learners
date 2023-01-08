@@ -24,7 +24,7 @@ public class Lecture {
     Time time;
     String venue;
     String instructor;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "student_lectures",
             joinColumns = {@JoinColumn(name = "lecture_id")},

@@ -1,5 +1,6 @@
 package com.sula.ranjith_learners.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sula.ranjith_learners.model.enums.CivilStatus;
 import com.sula.ranjith_learners.model.enums.Gender;
 import com.sula.ranjith_learners.model.enums.LicenceType;
@@ -20,7 +21,7 @@ public class Student implements SuperEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private int id;
     private String name;
     private String address;
     private int age;
@@ -44,6 +45,7 @@ public class Student implements SuperEntity {
     Trial trial;
     private String isLicenseIssued;
     @ManyToMany(mappedBy = "students")
+    @JsonIgnore
     private List<Lecture> lectures;
 
 
