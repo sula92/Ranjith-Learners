@@ -3,39 +3,56 @@ package com.sula.ranjith_learners.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.internet.MimeMessage;
-import java.util.HashMap;
-import java.util.Map;
+import javax.transaction.Transactional;
 
-@Controller
+@RestController
+@RequestMapping(
+        value = "/api",
+        produces = "application/json")
+@Transactional
+
+@CrossOrigin(origins = {
+        "*"
+
+},
+        allowedHeaders = "*",
+
+        maxAge = 15 * 60,
+        methods = {
+                RequestMethod.GET,
+                RequestMethod.POST,
+                RequestMethod.DELETE,
+                RequestMethod.PUT
+        })
 public class EmailController {
 
     @Autowired
     private JavaMailSender sender;
 
-    @RequestMapping("/simpleemail")
-    @ResponseBody
-    String home() {
+    @GetMapping("/mail/{email}/{msg}")
+    //@ResponseBody
+    String home(@PathVariable String email, @PathVariable String msg) {
+
+        System.out.println("XXXX"+email+msg);
+
         try {
-            sendEmail();
+            sendEmail(email, msg);
             return "Email Sent!";
         }catch(Exception ex) {
             return "Error in sending email: "+ex;
         }
     }
 
-    private void sendEmail() throws Exception{
+    private void sendEmail(String email, String msg) throws Exception{
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        String txt="<h1>How are you?</h1>";
+        String txt=msg;
 
-        helper.setTo("indeepadissanayake95@gmail.com");
+        helper.setTo(email);
         helper.setText(txt);
         helper.setSubject("Hi");
 
