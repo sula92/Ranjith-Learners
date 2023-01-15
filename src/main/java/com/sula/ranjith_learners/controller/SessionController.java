@@ -29,7 +29,7 @@ import java.util.List;
                 RequestMethod.DELETE,
                 RequestMethod.PUT
         })
-public class LectureController {
+public class SessionController {
 
     @Autowired
     LectureRepository lectureRepository;
@@ -37,12 +37,12 @@ public class LectureController {
     @Autowired
     StudentRepository studentRepository;
 
-    @GetMapping("/lectures")
+    @GetMapping("/session")
     List<Lecture> getLectures(){
        return lectureRepository.findAll();
     }
 
-    @GetMapping("/lectures/{id}")
+    @GetMapping("/session/{id}")
     Lecture addStd(@PathVariable int id){
         return lectureRepository.findById(id).get();
 
@@ -53,13 +53,13 @@ public class LectureController {
         return lectureRepository.findById(id).get();
     }*/
 
-    @PostMapping("/lectures")
+    @PostMapping("/session")
     Lecture createLecture(@RequestBody Lecture lecture){
 
         return lectureRepository.save(lecture);
     }
 
-    @GetMapping("/lectures/add/{sid}/{lecid}")
+    @GetMapping("/session/add/{sid}/{lecid}")
     Student addStudent(@PathVariable String sid, @PathVariable int lecid){
         int n=sid.indexOf("-");
         String stdId=sid.substring(0,n);
@@ -74,13 +74,13 @@ public class LectureController {
         //lectureRepository.saveStudent(lecid,sid);
     }
 
-    @PutMapping("/lectures/{id}")
+    @PutMapping("/session/{id}")
     Lecture editLecture(@PathVariable int id, @RequestBody Lecture lecture){
         lectureRepository.findById(id).get();
         return lectureRepository.save(lecture);
     }
 
-    @DeleteMapping("/lectures/{id}")
+    @DeleteMapping("/session/{id}")
     void deleteLecture(@PathVariable int id){
         lectureRepository.findById(id).get();
         lectureRepository.deleteById(id);

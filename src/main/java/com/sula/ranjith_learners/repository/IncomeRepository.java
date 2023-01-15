@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IncomeRepository extends JpaRepository<Income, Integer> {
 
-    @Query(value = "SELECT SUM(amount) FROM income WHERE date LIKE '2023-01%'", nativeQuery = true)
+    @Query(value = "SELECT SUM(amount) FROM income", nativeQuery = true)
     Long getTotIncome();
 }

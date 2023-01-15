@@ -2,6 +2,7 @@ package com.sula.ranjith_learners.controller;
 
 import com.sula.ranjith_learners.dto.BranchStudentCountDTO;
 import com.sula.ranjith_learners.dto.VehicleDTO;
+import com.sula.ranjith_learners.exceptions.ResourceNotFoundException;
 import com.sula.ranjith_learners.model.Vehicle;
 import com.sula.ranjith_learners.repository.BranchRepository;
 import com.sula.ranjith_learners.repository.SupplierRepository;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(
@@ -114,5 +116,12 @@ public class VehicleController {
     }
 
 
+    @GetMapping("/vehicles/supplier/{sid}")
+    public List<Vehicle> getSupplierVehicles(@PathVariable int sid) throws ResourceNotFoundException {
+        return vehicleRepository.findAll().stream()
+                .filter(vehicle -> vehicle.getSupplier().getId()==sid)
+                .collect(Collectors.toList());
+
+    }
 
 }

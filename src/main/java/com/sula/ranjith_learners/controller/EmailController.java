@@ -39,7 +39,7 @@ public class EmailController {
         System.out.println("XXXX"+email+msg);
 
         try {
-            sendEmail(email, msg);
+            sendEmail("indeepadissanayake95@gmail.com", msg);
             return "Email Sent!";
         }catch(Exception ex) {
             return "Error in sending email: "+ex;

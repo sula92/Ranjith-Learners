@@ -4,8 +4,9 @@ package com.sula.ranjith_learners.controller;
 import com.sula.ranjith_learners.dto.IncomeExpenseDTO;
 import com.sula.ranjith_learners.dto.TotIncomeAndExpensesDTO;
 import com.sula.ranjith_learners.exceptions.ResourceNotFoundException;
-import com.sula.ranjith_learners.model.*;
 import com.sula.ranjith_learners.model.Expense;
+import com.sula.ranjith_learners.model.Income;
+import com.sula.ranjith_learners.repository.EmployeeSalaryRepository;
 import com.sula.ranjith_learners.repository.ExpenseRepository;
 import com.sula.ranjith_learners.repository.IncomeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,9 @@ public class IncomeAndExpenseController {
 
         @Autowired
         IncomeRepository incomeRepository;
+
+        @Autowired
+        EmployeeSalaryRepository employeeSalaryRepository;
 
         @ResponseStatus(HttpStatus.CREATED)
         @PostMapping("/expenses")
@@ -159,15 +163,18 @@ public class IncomeAndExpenseController {
                 return incomeExpenseDTOS;
         }
 
-        @GetMapping("/income&expense")
+        @GetMapping("/incomeexpense")
         public TotIncomeAndExpensesDTO getTotIncome(){
                 long totIncome=incomeRepository.getTotIncome();
                 long totOtherExp=expenseRepository.getTotOtherExpenses();
 
+
+                long totSal=employeeSalaryRepository.getTotSal();
+
                 TotIncomeAndExpensesDTO totIncomeAndExpensesDTO =new TotIncomeAndExpensesDTO();
                 totIncomeAndExpensesDTO.setGrossIncome(String.valueOf(totIncome));
                 totIncomeAndExpensesDTO.setNetIncome(String.valueOf(totIncome));
-                totIncomeAndExpensesDTO.setSalariesPaid(String.valueOf(totOtherExp));
+                totIncomeAndExpensesDTO.setSalariesPaid(String.valueOf(totSal));
                 totIncomeAndExpensesDTO.setTotalOtherExpenses(String.valueOf(totOtherExp));
 
                 return totIncomeAndExpensesDTO;

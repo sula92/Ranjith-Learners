@@ -29,12 +29,10 @@ public class Employee implements SuperEntity {
     @ManyToOne
     @JoinColumn(name = "branch_id", referencedColumnName = "id")
     private Branch branch;
-    private double salary;
     private Date dateOfRecruited;
     @Enumerated(EnumType.STRING)
     private CivilStatus civilStatus;
-    private String emergencyContactPerson;
-    private String emergencyContactNumber;
+    
 
     /*@Lob
     @Column(name="picture")

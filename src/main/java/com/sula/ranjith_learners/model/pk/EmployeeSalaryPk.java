@@ -1,12 +1,21 @@
 package com.sula.ranjith_learners.model.pk;
 
 
-import com.sula.ranjith_learners.model.Employee;
 import com.sula.ranjith_learners.model.SuperEntity;
+import lombok.*;
 
-import javax.persistence.*;
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.sql.Date;
 
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Embeddable
 public class EmployeeSalaryPk implements SuperEntity {
 
@@ -16,35 +25,5 @@ public class EmployeeSalaryPk implements SuperEntity {
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    public EmployeeSalaryPk() {
-    }
 
-    public EmployeeSalaryPk(long employee_id, Date date) {
-        this.employee_id = employee_id;
-        this.date = date;
-    }
-
-    public long getEmployee_id() {
-        return employee_id;
-    }
-
-    public void setEmployee_id(long employee_id) {
-        this.employee_id = employee_id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    @Override
-    public String toString() {
-        return "EmployeeSalaryPk{" +
-                "employee_id=" + employee_id +
-                ", date=" + date +
-                '}';
-    }
 }

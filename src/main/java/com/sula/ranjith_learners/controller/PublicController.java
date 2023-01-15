@@ -1,17 +1,12 @@
 package com.sula.ranjith_learners.controller;
 
-import com.sula.ranjith_learners.dto.IncomeExpenseDTO;
-import com.sula.ranjith_learners.dto.TotIncomeAndExpensesDTO;
-import com.sula.ranjith_learners.model.OtherExpense;
-import com.sula.ranjith_learners.model.StudentPayment;
-import com.sula.ranjith_learners.repository.EmployeeRepository;
-import com.sula.ranjith_learners.repository.OtherExpenseRepository;
-import com.sula.ranjith_learners.repository.StudentPaymentRepository;
+import com.sula.ranjith_learners.dto.CommonDTO;
+import com.sula.ranjith_learners.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -39,7 +34,19 @@ public class PublicController {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    @GetMapping("/income&expense")
+    @Autowired
+    StudentRepository studentRepository;
+
+    @Autowired
+    ExpenseRepository expenseRepository;
+
+    @Autowired
+    IncomeRepository incomeRepository;
+
+    @Autowired
+    EmployeeSalaryRepository  employeeSalaryRepository;
+
+    /*@GetMapping("/income&expense")
     public TotIncomeAndExpensesDTO getTotIncome(){
         long stdIncome=studentPaymentRepository.getStudentMonthlyIncome();
         long totOtherExp=otherExpenseRepository.getTotOtherExpenses();
@@ -87,6 +94,25 @@ public class PublicController {
 
 
         return incomeExpenseDTOS;
+    }*/
+
+    @GetMapping("/dashboard")
+    public CommonDTO getDashboardRecords(){
+        Map<String, String> stringStringMap=new HashMap<>();
+
+        long x=studentRepository.findAll().stream().count();
+        long y=studentRepository.findAll().stream()
+                .filter(student -> student.getIsLicenseIssued().equalsIgnoreCase("yes"))
+                .count();
+        long z=expenseRepository.getTotOtherExpenses()+employeeSalaryRepository.getTotSal();
+        long p=incomeRepository.getTotIncome();
+
+        stringStringMap.put("x", String.valueOf(x));
+        stringStringMap.put("y", String.valueOf(y));
+        stringStringMap.put("z", String.valueOf(z));
+        stringStringMap.put("p", String.valueOf(p));
+
+        return CommonDTO.builder().stringMap(stringStringMap).build();
     }
 
 }
